@@ -9,6 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state("login", {url: "/login", templateUrl: "/partials/login.html", controller: "loginCtrl"})
     .state("dash", {url: "/dashboard", templateUrl: "/partials/dashboard.html", controller: "dashCtrl"})
     .state("profile", {url: "/profile", templateUrl: "/partials/profile.html", controller: "profileCtrl"})
+    .state("editProfile", {url: "/profile/edit", templateUrl: "/partials/editProfile.html", controller: "editProfileCtrl"})
 
 
   $urlRouterProvider.otherwise("/");
@@ -33,6 +34,44 @@ app.controller("dashCtrl", function($http, $state){
       $state.go("login")
     });
   console.log("dashCtrl");
+});
+
+app.controller("editProfileCtrl", function($scope, $http, $state){
+  $http.post("/users/auth")
+    .then(function(userData) {
+      console.log("Authorized User");
+      console.log("userData:", userData);
+      $http.get("/users/profile")
+        .then(function(profileData) {
+          var user = profileData.data;
+          console.log("user:", user);
+          console.log("user.username:", user.username);
+          $scope.user = {};
+          $scope.user.email = user.email;
+          $scope.user.username = user.username;
+          $scope.user.gender = user.gender;
+          $scope.user.seeking = user.seeking;
+          $scope.user.dob = user.dob;
+          $scope.user.likes = user.likes;
+          $scope.user.dislikes = user.dislikes;
+          $scope.user.imageUrl = user.imageUrl;
+        },
+        function(err) {
+          console.error(err);
+        }
+      )
+    },
+    function(err) {
+      swal("You must be logged in to view the previous page");
+      $state.go("login")
+    });
+
+  $scope.updateProfile = function(){
+    console.log("$scope.user:", $scope.user);
+    $http.post("/users/profile", $scope.user);
+  }
+
+  console.log("editProfileCtrl");
 });
 
 app.controller("homeCtrl", function(){

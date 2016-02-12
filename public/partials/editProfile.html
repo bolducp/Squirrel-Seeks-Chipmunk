@@ -1,0 +1,38 @@
+
+<div class="container">
+  <h1>Editing Your Profile!</h1>
+  <label>Current Image:</label><img ng-src="{{user.imageUrl}}" alt="No Image Set."/>
+  <p>Username: {{user.username}}</p>
+  <form ng-submit="updateProfile()">
+    <div class="form-group">
+      <label>Image URL:</label>
+      <input type="text" ng-model="user.imageUrl" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label>E-Mail:</label>
+      <input type="text" value="{{user.email}}" ng-model="user.email" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label>Gender: </label>
+      <select ng-model="user.gender" class="form-control">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Seeking:  ( Hold shift / control [for windows] / command [for mac] to select multiple )</label>
+      <select multiple="multiple" ng-model="user.seeking" class="form-control">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Date of Birth: </label>
+      <input type="date" value="{{user.dob}}" ng-model="user.dob" class="form-control"/>
+    </div>
+    <button class="btn btn-success">Save Changes</button>
+    <button ui-sref="profile" class="btn btn-danger">Cancel</button>
+  </form>
+</div>

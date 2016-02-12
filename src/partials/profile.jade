@@ -6,9 +6,5 @@
   p Gender: {{user.gender}}
   p Seeking: {{user.seeking}}
   p Date of Birth: {{user.dob}}
-  p Likes: 
-    p(ng-repeat("like in user.likes track by $index")){{like}}
-  p Dislikes:
-    p(ng-repeat("dislike in user.dislikes track by $index")){{dislike}}
     
   button(ui-sref="editProfile").btn.btn-info Edit Profile

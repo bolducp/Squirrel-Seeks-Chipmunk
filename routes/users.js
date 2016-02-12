@@ -50,6 +50,20 @@ router.get("/profile", authMiddleware, function(req, res, next) {
   });
 });
 
+router.post("/profile", authMiddleware, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if(err) return res.status(400).send(err);
+    for (var attr in req.body){
+      user[attr] = req.body[attr];
+    }
+    user.save(function(err, savedUser){
+      if(err) return res.status(400).send(err);
+      console.log("saved user", savedUser);
+    });
+    res.send(user);
+  });
+});
+
 
 
 

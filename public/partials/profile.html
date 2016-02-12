@@ -6,11 +6,5 @@
   <p>Gender: {{user.gender}}</p>
   <p>Seeking: {{user.seeking}}</p>
   <p>Date of Birth: {{user.dob}}</p>
-  <p>Likes: 
-    <p ng-repeat("like="ng-repeat("like" in="in" user.likes="user.likes" track="track" by="by" $index")="$index")">{{like}}</p>
-  </p>
-  <p>Dislikes:
-    <p ng-repeat("dislike="ng-repeat("dislike" in="in" user.dislikes="user.dislikes" track="track" by="by" $index")="$index")">{{dislike}}</p>
-  </p>
   <button ui-sref="editProfile" class="btn btn-info">Edit Profile</button>
 </div>

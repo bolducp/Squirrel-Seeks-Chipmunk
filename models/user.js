@@ -13,7 +13,7 @@ var userSchema = new mongoose.Schema({
   likes: [String],
   dislikes: [String],
   gender: String,
-  seeking: String,
+  seeking: [String],
   imageUrl: String
 });
 

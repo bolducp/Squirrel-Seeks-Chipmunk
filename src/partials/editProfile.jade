@@ -1,0 +1,30 @@
+.container
+  h1 Editing Your Profile!
+  label Current Image:
+  img(ng-src="{{user.imageUrl}}", alt="No Image Set.")
+  p Username: {{user.username}}
+  form(ng-submit="updateProfile()")
+    .form-group
+      label Image URL:
+      input(type="text", ng-model="user.imageUrl").form-control
+    .form-group
+      label E-Mail:
+      input(type="text", value="{{user.email}}", ng-model="user.email").form-control
+    .form-group
+      label Gender: 
+      select(ng-model="user.gender").form-control
+        option Male
+        option Female
+        option Other
+    .form-group
+      label Seeking:  ( Hold shift / control [for windows] / command [for mac] to select multiple )
+      select(multiple ng-model="user.seeking").form-control
+        option Male
+        option Female
+        option Other
+    .form-group
+      label Date of Birth: 
+      input(type="date", value="{{user.dob}}", ng-model="user.dob").form-control
+    button.btn.btn-success Save Changes
+    button(ui-sref="profile").btn.btn-danger Cancel
+    
