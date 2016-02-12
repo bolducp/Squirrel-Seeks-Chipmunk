@@ -26,7 +26,8 @@ body(ng-app="SSC")
         li#navLogin
           a(ui-sref='login') Login 
         li#navLogout
-          a(ui-sref='logout') Logout
+          form(method="post" action="users/logout")#logoutForm
+            a(onclick="document.getElementById('logoutForm').submit();") Logout
       
   ui-view
   //- put navbar here

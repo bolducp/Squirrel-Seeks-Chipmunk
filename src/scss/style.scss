@@ -1,8 +1,3 @@
-.viewContainer {
-  top: 50px;
-  left: 0px;
-  position: absolute;  
-}
 
 #home {
   background-image: url("http://www.hachettebookgroup.com/_b2c/media/cache/0e/d4/0ed47125fff693bb048965804ecef5c7.jpg");
@@ -17,6 +12,20 @@
   }
 }
 
-nav {
+.navbar {
   z-index: 10;
+  margin-bottom: 0px;
+}
+
+#logoutForm > a {
+  color: #777;
+  padding: 15px;
+  line-height: 20px;
+  display: block;
+  position: relative;
+  &:hover {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }

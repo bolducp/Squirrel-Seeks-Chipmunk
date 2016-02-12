@@ -12,13 +12,12 @@ var ref = new Firebase('https://meandates.firebaseio.com/');
 var User = require('../models/user');
 
 
-userMethods.generateToken = function() {
+userMethods.generateToken = function(tokenData) {
   var payload = {
-    uid: this.uid,
-    _id: this._id
+    uid: tokenData.uid,
+    _id: tokenData._id
   };
   var token = jwt.encode(payload, JWT_SECRET);
-
   return token;
 };
 
@@ -26,8 +25,6 @@ userMethods.register = function(req, res, next) {
   ref.createUser({email: req.body.email, password: req.body.password}, function(err, userData){
     if (err) return res.status(400).send(err);
 
-    console.log("userData:", userData);
-    console.log("req.body:", req.body);
     var userObj = {
       email: req.body.email,
       username: req.body.username,
@@ -36,6 +33,19 @@ userMethods.register = function(req, res, next) {
     User.create(userObj, function(err){
       if (err) return res.status(400).send(err);
       next();
+    });
+  });
+}
+
+userMethods.login = function(req, res, next) {
+  console.log("req.body", req.body);
+  ref.authWithPassword(req.body, function(err, authData) {
+    if (err) return res.status(400).send(err);
+    User.findOne({uid: authData.uid}, function(err, user) {
+      var tokenData = {uid: authData.uid, _id: user._id};
+      res.cookie("userToken", userMethods.generateToken(tokenData));
+      next();
+      console.log("auth data", authData);
     });
   });
 }

@@ -21,6 +21,14 @@ router.post('/register', userMethods.register, function(req, res, next) {
   res.send("register!");
 });
 
+router.post('/login', userMethods.login, function(req, res, next) {
+  res.send("login!");
+});
+
+router.post("/logout", function(req, res, next) {
+  res.clearCookie("userToken").redirect("/");
+});
+
 
 
 
