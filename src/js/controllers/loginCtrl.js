@@ -6,12 +6,7 @@ app.controller("loginCtrl", function($scope, $http, $state){
 
     $http.post("/users/login", { email: $scope.email, password: $scope.password})
       .then(function(data){
-        // if(data.newState){
-        //   $state.go(data.newState);
-        // }
-        // else {
-        //   $state.go("dash");
-        // }
+        $state.go("dash");
 
       }, function(err){
         console.error(err);

@@ -10,6 +10,7 @@ head
   script(src="/bower_components/angular-ui-router/release/angular-ui-router.min.js")
   script(src="/bower_components/sweetalert/dist/sweetalert.min.js")
   script(src="/js/bundle.js")
+  
 body(ng-app="SSC")
   nav.navbar.navbar-default.navbar-top
     .container
@@ -26,5 +27,4 @@ body(ng-app="SSC")
         li#navLogout
           form(method="post" action="users/logout")#logoutForm
             a(onclick="document.getElementById('logoutForm').submit();") Logout
-      
   ui-view 

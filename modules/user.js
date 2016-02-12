@@ -42,10 +42,10 @@ userMethods.login = function(req, res, next) {
   ref.authWithPassword(req.body, function(err, authData) {
     if (err) return res.status(400).send(err);
     User.findOne({uid: authData.uid}, function(err, user) {
+      console.log("Found in mongo");
       var tokenData = {uid: authData.uid, _id: user._id};
       res.cookie("userToken", userMethods.generateToken(tokenData));
       next();
-      console.log("auth data", authData);
     });
   });
 }

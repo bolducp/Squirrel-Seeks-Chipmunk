@@ -1,3 +1,20 @@
-app.controller("dashCtrl", function(){
+app.controller("dashCtrl", function($http, $state){
+  $http.post("/users/auth")
+    .then(function(userData) {
+      console.log("Authorized User");
+      console.log("userData:", userData);
+      $http.get("/users/dashboard")
+        .then(function(dashData) {
+          console.log("dashData:", dashData.data);
+        },
+        function(err) {
+          console.error(err);
+        }
+      )
+    },
+    function(err) {
+      swal("You must be logged in to view the previous page");
+      $state.go("login")
+    });
   console.log("dashCtrl");
 });

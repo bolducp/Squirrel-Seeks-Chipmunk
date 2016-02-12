@@ -5,7 +5,8 @@ var userMethods = require("../modules/user");
 var authMiddleware = require("../config/auth");
 
 /* GET home page. */
-router.get('/', authMiddleware, function(req, res, next) {
+router.get('/', function(req, res, next) {
+  console.log("this ran");
   res.render('index');
 });
 
