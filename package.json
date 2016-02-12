@@ -24,6 +24,7 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.2.0",
     "jade": "^1.11.0",
     "jwt-simple": "^0.4.1",

@@ -1,6 +1,7 @@
 link(rel="stylesheet", href="/css/login.css")
 .col-xs-offset-2.col-xs-8
   h1.text-center Login
+    br
    form(ng-submit="doLogin()")#loginForm
      .form-group
        label(for='email') Email address:
@@ -8,4 +9,4 @@ link(rel="stylesheet", href="/css/login.css")
      .form-group
        label(for='password') Password:
        input#password.password.form-control(ng-model="password", type='password', placeholder='Password', required)
-     button.btn.btn-info.btn-lg Login
+     button.btn.btn-success.btn-lg Login

@@ -9,6 +9,11 @@
     text-align: center;
     color: lightsteelblue; }
 
+body {
+  font-family: 'Marvel', sans-serif; }
+  body h1, body h2 {
+    font-family: 'Satisfy', cursive; }
+
 .navbar {
   z-index: 10;
   margin-bottom: 0px; }

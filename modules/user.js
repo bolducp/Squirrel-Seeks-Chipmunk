@@ -50,6 +50,10 @@ userMethods.login = function(req, res, next) {
   });
 }
 
+userMethods.loggedIn = function(req, res, next) {
+  if(req.cookies.userToken) res.newState = "dash";//set res.newState
+  next();
+}
 
 
 module.exports = userMethods;

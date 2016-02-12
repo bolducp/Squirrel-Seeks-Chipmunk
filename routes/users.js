@@ -22,11 +22,11 @@ router.post('/register', userMethods.register, function(req, res, next) {
 });
 
 router.post('/login', userMethods.login, function(req, res, next) {
-  res.send("login!");
+  res.send("Logged In");
 });
 
 router.post("/logout", function(req, res, next) {
-  res.clearCookie("userToken").redirect("/");
+  res.clearCookie("userToken").redirect("/"); //change this to $state.go after adding a main.js
 });
 
 

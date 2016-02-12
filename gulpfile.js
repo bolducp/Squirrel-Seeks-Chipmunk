@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var jade = require('gulp-jade');
 var autoprefixer = require('gulp-autoprefixer');
 var rimraf = require('rimraf');
+var plumber = require('gulp-plumber');
 
 var config = {
   paths: {
@@ -27,13 +28,15 @@ gulp.task('clean-partials', function(cb) {
 
 gulp.task('js', ['clean-js'], function() {
   return gulp.src(config.paths.js)
+    .pipe(plumber())
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('./public/js'));
 });
 
-// concatonates all the js files into one big "bundle js" file
+
 gulp.task('css', ['clean-css'], function() {
   return gulp.src(config.paths.sass)
+    .pipe(plumber())
     .pipe(sass())
     .pipe(autoprefixer({
      browsers: ['last 2 versions', 'ie >= 9']
@@ -42,9 +45,9 @@ gulp.task('css', ['clean-css'], function() {
 });
 
 
-
 gulp.task('jade', ['clean-partials'], function(){
   return gulp.src(config.paths.jade)
+    .pipe(plumber())
     .pipe(jade({pretty: true}))
     .pipe(gulp.dest('./public/partials'));
 })

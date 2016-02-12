@@ -1,5 +1,7 @@
 head
   link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
+  link(rel="stylesheet", href='https://fonts.googleapis.com/css?family=Satisfy|Marvel')
+  link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
   link(rel="stylesheet", href="/css/style.css")
   link(rel="stylesheet", href="/bower_components/sweetalert/dist/sweetalert.css")
   script(src="/bower_components/jquery/dist/jquery.min.js")
@@ -12,14 +14,10 @@ body(ng-app="SSC")
   nav.navbar.navbar-default.navbar-top
     .container
       .navbar-header
-        a.navbar-brand(ui-sref='home') Angular UI Stocks
+        a.navbar-brand(ui-sref='home') Squirrel Seeks Chipmunk
       ul.nav.navbar-nav
-        li
-          a(ui-sref='home') Home
-        li
-          a(ui-sref='list') List
-        li
-          a(ui-sref='add') Add
+        //- li
+        //-   a(ui-sref='home') Home
       ul.nav.navbar-nav.navbar-right
         li#navRegister
           a(ui-sref='register') Register
@@ -29,6 +27,4 @@ body(ng-app="SSC")
           form(method="post" action="users/logout")#logoutForm
             a(onclick="document.getElementById('logoutForm').submit();") Logout
       
-  ui-view
-  //- put navbar here
-  
+  ui-view 
