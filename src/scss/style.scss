@@ -1,0 +1,22 @@
+.viewContainer {
+  top: 50px;
+  left: 0px;
+  position: absolute;  
+}
+
+#home {
+  background-image: url("http://www.hachettebookgroup.com/_b2c/media/cache/0e/d4/0ed47125fff693bb048965804ecef5c7.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  width: 100vw;
+  height: 100vh;
+  h1 {
+    width: 100vw;
+    text-align: center;
+    color: lightsteelblue;
+  }
+}
+
+nav {
+  z-index: 10;
+}

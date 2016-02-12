@@ -1,0 +1,16 @@
+#register.viewController.col-xs-offset-2.col-xs-8
+  h1.text-center Register
+   form(ng-submit="doRegister()")#registerForm
+     .form-group
+       label(for='email') Email address:
+       input#email.form-control(ng-model="email", type='email', placeholder='Email', required)
+     .form-group
+       label(for='username') Username:
+       input#username.form-control(ng-model="username", type='text', placeholder='Username', required)
+     .form-group
+       label(for='password') Password:
+       input#password.password.form-control(ng-model="password", type='password', placeholder='Password', required)
+     .form-group
+       label(for='password2') Password (again):
+       input#password2.password.form-control(ng-model="password2", type='password', placeholder='Password Again', required)
+     button.btn.btn-info.btn-lg Register
