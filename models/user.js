@@ -11,7 +11,10 @@ var userSchema = new mongoose.Schema({
   location: {type: Number},
   dob: {type: Date},
   likes: [String],
-  dislikes: [String]
+  dislikes: [String],
+  gender: String,
+  seeking: String,
+  imageUrl: String
 });
 
 

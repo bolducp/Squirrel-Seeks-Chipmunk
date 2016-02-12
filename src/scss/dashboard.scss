@@ -2,6 +2,8 @@ body {
   background-color: Gainsboro;
 }
 
-#viewProfile {
-  
+.link {
+  &:hover{
+    cursor: pointer;
+  }
 }

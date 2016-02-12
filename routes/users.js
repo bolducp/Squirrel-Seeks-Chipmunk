@@ -43,6 +43,13 @@ router.get("/dashboard", authMiddleware, function(req, res, next) {
   });
 });
 
+router.get("/profile", authMiddleware, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if(err) return res.status(400).send(err);
+    res.send(user);
+  });
+});
+
 
 
 

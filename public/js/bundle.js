@@ -8,6 +8,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state("register", {url: "/register", templateUrl: "/partials/register.html", controller: "registerCtrl"})
     .state("login", {url: "/login", templateUrl: "/partials/login.html", controller: "loginCtrl"})
     .state("dash", {url: "/dashboard", templateUrl: "/partials/dashboard.html", controller: "dashCtrl"})
+    .state("profile", {url: "/profile", templateUrl: "/partials/profile.html", controller: "profileCtrl"})
 
 
   $urlRouterProvider.otherwise("/");
@@ -55,7 +56,39 @@ app.controller("loginCtrl", function($scope, $http, $state){
 
 });
 
-app.controller("registerCtrl", function($scope, $http){
+app.controller("profileCtrl", function($scope, $http, $state){
+  $http.post("/users/auth")
+    .then(function(userData) {
+      console.log("Authorized User");
+      console.log("userData:", userData);
+      $http.get("/users/profile")
+        .then(function(profileData) {
+          var user = profileData.data;
+          console.log("user:", user);
+          console.log("user.username:", user.username);
+          $scope.user = {};
+          $scope.user.email = user.email;
+          $scope.user.username = user.username;
+          $scope.user.gender = user.gender;
+          $scope.user.seeking = user.seeking;
+          $scope.user.dob = user.dob;
+          $scope.user.likes = user.likes;
+          $scope.user.dislikes = user.dislikes;
+          $scope.user.imageUrl = user.imageUrl;
+        },
+        function(err) {
+          console.error(err);
+        }
+      )
+    },
+    function(err) {
+      swal("You must be logged in to view the previous page");
+      $state.go("login")
+    });
+  console.log("profileCtrl");
+});
+
+app.controller("registerCtrl", function($scope, $http, $state){
   console.log("registerCtrl");
 
   $scope.doRegister = function(){
@@ -65,6 +98,8 @@ app.controller("registerCtrl", function($scope, $http){
       $http.post("/users/register", userData)
         .then(function(data){
           console.log(data);
+          swal("Registered Successfully!", "", "success");
+          $state.go("login")
         }, function(err){
           console.error(err);
         });

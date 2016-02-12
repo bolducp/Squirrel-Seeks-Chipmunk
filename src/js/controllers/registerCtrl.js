@@ -1,4 +1,4 @@
-app.controller("registerCtrl", function($scope, $http){
+app.controller("registerCtrl", function($scope, $http, $state){
   console.log("registerCtrl");
 
   $scope.doRegister = function(){
@@ -8,6 +8,8 @@ app.controller("registerCtrl", function($scope, $http){
       $http.post("/users/register", userData)
         .then(function(data){
           console.log(data);
+          swal("Registered Successfully!", "", "success");
+          $state.go("login")
         }, function(err){
           console.error(err);
         });
