@@ -2,9 +2,7 @@ app.controller("dashCtrl", function($http, $state){
   $http.post("/users/auth")
     .then(function(userData) {
       $http.get("/users/dashboard")
-        .then(function(dashData) {
-          console.log("dashData:", dashData.data);
-        },
+        .then(function(){},
         function(err) {
           console.error(err);
         }
@@ -14,5 +12,4 @@ app.controller("dashCtrl", function($http, $state){
       swal("You must be logged in to view the previous page");
       $state.go("login")
     });
-  console.log("dashCtrl");
 });

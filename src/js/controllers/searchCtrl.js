@@ -8,7 +8,6 @@ app.controller("searchCtrl", function($http, $state, $scope, $timeout){
     .then(function() {
       $http.get("/users/search")
         .then(function(res){
-          console.log("res", res);
           if(res.data.swalErr){
             swal(res.data.swalErr);
             $state.go("editProfile");
@@ -44,9 +43,6 @@ app.controller("searchCtrl", function($http, $state, $scope, $timeout){
           );
             $scope.chatMsg = "";
           }
-
-
-
         }, function(err){
           console.error(err);
         })
