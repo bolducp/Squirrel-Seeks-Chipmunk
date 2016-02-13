@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("SSC", ["ui.router", "firebase"]);
+var app = angular.module("SSC", ["ui.router"]);
 
 app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider
