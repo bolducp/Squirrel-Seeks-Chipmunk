@@ -1,8 +1,6 @@
 app.controller("dashCtrl", function($http, $state){
   $http.post("/users/auth")
     .then(function(userData) {
-      console.log("Authorized User");
-      console.log("userData:", userData);
       $http.get("/users/dashboard")
         .then(function(dashData) {
           console.log("dashData:", dashData.data);

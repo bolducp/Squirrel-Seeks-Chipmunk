@@ -10,6 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state("dash", {url: "/dashboard", templateUrl: "/partials/dashboard.html", controller: "dashCtrl"})
     .state("profile", {url: "/profile", templateUrl: "/partials/profile.html", controller: "profileCtrl"})
     .state("editProfile", {url: "/profile/edit", templateUrl: "/partials/editProfile.html", controller: "editProfileCtrl"})
+    .state("search", {url: "/profile/search", templateUrl: "/partials/search.html", controller: "searchCtrl"})
 
   $urlRouterProvider.otherwise("/");
 });

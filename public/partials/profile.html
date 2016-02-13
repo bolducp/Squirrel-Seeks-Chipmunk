@@ -4,11 +4,12 @@
   <h1>Your Profile!</h1><br/><img ng-src="{{user.imageUrl}}" alt="Image not found."/><br/><br/>
   <p>E-Mail: {{user.email}}</p>
   <p>Username: {{user.username}}</p>
+  <p>Location (zip code): {{user.location}}</p>
   <p>Gender: {{user.gender}}</p>
   <p>Seeking:</p>
   <ul> 
     <li ng-repeat="gender in user.seeking track by $index">{{gender}}</li>
   </ul>
-  <p>Date of Birth: {{user.pretty.dob}}</p>
+  <p>Date of Birth: {{user.prettydob}}</p>
   <button ui-sref="editProfile" class="btn btn-info">Edit Profile</button>
 </div>

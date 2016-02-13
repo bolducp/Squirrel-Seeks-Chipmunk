@@ -59,6 +59,44 @@ router.post("/profile", authMiddleware, function(req, res, next) {
   });
 });
 
+router.get("/search", authMiddleware, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if(err) return res.status(400).send(err);
+
+    User.find({ gender: { $in: user.seeking }, available: true }, function(err, matches){
+      if(err) return res.status(400).send(err);
+
+      findMatch(user.seeking);
+
+      function findMatch(seeking, count){
+        if(!count) count = 0;
+        var index = Math.floor(Math.random()*matches.length);
+        var match = matches[index];
+        console.log("user.seeking", user.seeking);
+        console.log("user.gender", user.gender);
+        console.log("match.seeking", match.seeking);
+        if(!(match.seeking.indexOf(user.gender) !== -1) && count < 200){
+          console.log("Attemping to find match:", count);
+          findMatch(seeking, ++count);
+        }
+        else{
+          if(count < 200){
+            console.log("MATCH :", match);
+            res.send(match);
+          }
+          else {
+            res.send("could not find user");
+          }
+        }
+      }
+    });
+  });
+});
+
+
+
+
+
 
 
 

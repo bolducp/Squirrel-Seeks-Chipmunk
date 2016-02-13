@@ -13,6 +13,9 @@ link(rel="stylesheet", href="/css/editProfile.css")
       label Image URL:
       input(type="text", ng-model="user.imageUrl").form-control
     .form-group
+      label Location (zip code):
+      input(type="number", ng-model="user.location", min="501", max="99999").form-control
+    .form-group
       label Gender: 
       select(ng-model="user.gender").form-control
         option Male

@@ -1,25 +1,13 @@
 app.controller("profileCtrl", function($scope, $http, $state){
   $http.post("/users/auth")
     .then(function(userData) {
-      console.log("Authorized User");
-      console.log("userData:", userData);
       $http.get("/users/profile")
         .then(function(profileData) {
           var user = profileData.data;
-          console.log("user:", user);
-          console.log("user.username:", user.username);
-          $scope.user = {pretty: {}};
-          $scope.user.email = user.email;
-          $scope.user.username = user.username;
-          $scope.user.gender = user.gender;
-          $scope.user.seeking = user.seeking;
-          $scope.user.dob = user.dob;
+          $scope.user = user;
           if(user.dob){
-            $scope.user.pretty.dob = moment(user.dob).format("LL");
+            $scope.user.prettydob = moment(user.dob).format("LL");
           }
-          $scope.user.likes = user.likes;
-          $scope.user.dislikes = user.dislikes;
-          $scope.user.imageUrl = user.imageUrl;
         },
         function(err) {
           console.error(err);
@@ -30,5 +18,4 @@ app.controller("profileCtrl", function($scope, $http, $state){
       swal("You must be logged in to view the previous page");
       $state.go("login")
     });
-  console.log("profileCtrl");
 });

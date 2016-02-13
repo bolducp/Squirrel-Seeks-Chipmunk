@@ -7,10 +7,11 @@ link(rel="stylesheet", href="/css/profile.css")
   br
   p E-Mail: {{user.email}}
   p Username: {{user.username}}
+  p Location (zip code): {{user.location}}
   p Gender: {{user.gender}}
   p Seeking:
   ul 
     li(ng-repeat="gender in user.seeking track by $index") {{gender}}
-  p Date of Birth: {{user.pretty.dob}}
+  p Date of Birth: {{user.prettydob}}
     
   button(ui-sref="editProfile").btn.btn-info Edit Profile

@@ -10,6 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state("dash", {url: "/dashboard", templateUrl: "/partials/dashboard.html", controller: "dashCtrl"})
     .state("profile", {url: "/profile", templateUrl: "/partials/profile.html", controller: "profileCtrl"})
     .state("editProfile", {url: "/profile/edit", templateUrl: "/partials/editProfile.html", controller: "editProfileCtrl"})
+    .state("search", {url: "/profile/search", templateUrl: "/partials/search.html", controller: "searchCtrl"})
 
   $urlRouterProvider.otherwise("/");
 });
@@ -17,8 +18,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 app.controller("dashCtrl", function($http, $state){
   $http.post("/users/auth")
     .then(function(userData) {
-      console.log("Authorized User");
-      console.log("userData:", userData);
       $http.get("/users/dashboard")
         .then(function(dashData) {
           console.log("dashData:", dashData.data);
@@ -38,22 +37,11 @@ app.controller("dashCtrl", function($http, $state){
 app.controller("editProfileCtrl", function($scope, $http, $state){
   $http.post("/users/auth")
     .then(function(userData) {
-      console.log("Authorized User");
-      console.log("userData:", userData);
       $http.get("/users/profile")
         .then(function(profileData) {
           var user = profileData.data;
-          console.log("user:", user);
-          console.log("user.username:", user.username);
-          $scope.user = {};
-          $scope.user.email = user.email;
-          $scope.user.username = user.username;
-          $scope.user.gender = user.gender;
-          $scope.user.seeking = user.seeking;
+          $scope.user = user;
           $scope.user.dob = new Date(user.dob);
-          $scope.user.likes = user.likes;
-          $scope.user.dislikes = user.dislikes;
-          $scope.user.imageUrl = user.imageUrl;
         },
         function(err) {
           console.error(err);
@@ -66,11 +54,15 @@ app.controller("editProfileCtrl", function($scope, $http, $state){
     });
 
   $scope.updateProfile = function(){
-    console.log("$scope.user:", $scope.user);
-    $http.post("/users/profile", $scope.user);
+    $http.post("/users/profile", $scope.user)
+      .then(function(){
+        swal("Profile updated!", "", "success");
+        $state.go("profile");
+      },
+      function(err){
+        console.error(err);
+      });
   }
-
-  console.log("editProfileCtrl");
 });
 
 app.controller("homeCtrl", function($state, $http){
@@ -103,25 +95,13 @@ app.controller("loginCtrl", function($scope, $http, $state){
 app.controller("profileCtrl", function($scope, $http, $state){
   $http.post("/users/auth")
     .then(function(userData) {
-      console.log("Authorized User");
-      console.log("userData:", userData);
       $http.get("/users/profile")
         .then(function(profileData) {
           var user = profileData.data;
-          console.log("user:", user);
-          console.log("user.username:", user.username);
-          $scope.user = {pretty: {}};
-          $scope.user.email = user.email;
-          $scope.user.username = user.username;
-          $scope.user.gender = user.gender;
-          $scope.user.seeking = user.seeking;
-          $scope.user.dob = user.dob;
+          $scope.user = user;
           if(user.dob){
-            $scope.user.pretty.dob = moment(user.dob).format("LL");
+            $scope.user.prettydob = moment(user.dob).format("LL");
           }
-          $scope.user.likes = user.likes;
-          $scope.user.dislikes = user.dislikes;
-          $scope.user.imageUrl = user.imageUrl;
         },
         function(err) {
           console.error(err);
@@ -132,7 +112,6 @@ app.controller("profileCtrl", function($scope, $http, $state){
       swal("You must be logged in to view the previous page");
       $state.go("login")
     });
-  console.log("profileCtrl");
 });
 
 app.controller("registerCtrl", function($scope, $http, $state){
@@ -156,4 +135,21 @@ app.controller("registerCtrl", function($scope, $http, $state){
       $scope.password2 = "";
     }
   }
+});
+
+app.controller("searchCtrl", function($http, $state){
+  $http.post("/users/auth")
+    .then(function() {
+      $http.get("/users/search")
+        .then(function(matchData){
+          console.log("matchData", matchData);
+        }, function(err){
+          console.error(err);
+        })
+    },
+    function(err){
+      swal("Error", "there was an error", "error");
+      console.error(err);
+    }
+  );
 });
