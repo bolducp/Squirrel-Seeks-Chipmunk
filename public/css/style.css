@@ -28,3 +28,6 @@ body {
     color: #333;
     text-decoration: none;
     cursor: pointer; }
+
+#navLogout {
+  display: none; }

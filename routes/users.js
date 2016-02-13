@@ -12,11 +12,6 @@ var userMethods = require("../modules/user");
 var ref = new Firebase('https://meandates.firebaseio.com/');
 
 var authMiddleware = require("../config/auth");
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   console.log(userMethods);
-//   res.cookie("userToken", userMethods.generateToken()).send("cookie set");
-// });
 
 var User = require("../models/user");
 

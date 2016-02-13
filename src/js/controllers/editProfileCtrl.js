@@ -13,7 +13,7 @@ app.controller("editProfileCtrl", function($scope, $http, $state){
           $scope.user.username = user.username;
           $scope.user.gender = user.gender;
           $scope.user.seeking = user.seeking;
-          $scope.user.dob = user.dob;
+          $scope.user.dob = new Date(user.dob);
           $scope.user.likes = user.likes;
           $scope.user.dislikes = user.dislikes;
           $scope.user.imageUrl = user.imageUrl;

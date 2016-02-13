@@ -11,7 +11,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state("profile", {url: "/profile", templateUrl: "/partials/profile.html", controller: "profileCtrl"})
     .state("editProfile", {url: "/profile/edit", templateUrl: "/partials/editProfile.html", controller: "editProfileCtrl"})
 
-
   $urlRouterProvider.otherwise("/");
 });
 
@@ -51,7 +50,7 @@ app.controller("editProfileCtrl", function($scope, $http, $state){
           $scope.user.username = user.username;
           $scope.user.gender = user.gender;
           $scope.user.seeking = user.seeking;
-          $scope.user.dob = user.dob;
+          $scope.user.dob = new Date(user.dob);
           $scope.user.likes = user.likes;
           $scope.user.dislikes = user.dislikes;
           $scope.user.imageUrl = user.imageUrl;
@@ -74,8 +73,14 @@ app.controller("editProfileCtrl", function($scope, $http, $state){
   console.log("editProfileCtrl");
 });
 
-app.controller("homeCtrl", function(){
+app.controller("homeCtrl", function($state, $http){
   console.log("homeCtrl");
+  $http.post("/users/auth")
+    .then(function() {
+      $state.go("dash");
+    }, function(err) {
+      console.error(err);
+    });
 });
 
 app.controller("loginCtrl", function($scope, $http, $state){
@@ -105,12 +110,15 @@ app.controller("profileCtrl", function($scope, $http, $state){
           var user = profileData.data;
           console.log("user:", user);
           console.log("user.username:", user.username);
-          $scope.user = {};
+          $scope.user = {pretty: {}};
           $scope.user.email = user.email;
           $scope.user.username = user.username;
           $scope.user.gender = user.gender;
           $scope.user.seeking = user.seeking;
           $scope.user.dob = user.dob;
+          if(user.dob){
+            $scope.user.pretty.dob = moment(user.dob).format("LL");
+          }
           $scope.user.likes = user.likes;
           $scope.user.dislikes = user.dislikes;
           $scope.user.imageUrl = user.imageUrl;

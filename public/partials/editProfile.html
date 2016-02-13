@@ -1,16 +1,14 @@
 
+<link rel="stylesheet" href="/css/editProfile.css"/>
 <div class="container">
-  <h1>Editing Your Profile!</h1>
-  <label>Current Image:</label><img ng-src="{{user.imageUrl}}" alt="No Image Set."/>
+  <h1>Editing Your Profile!</h1><br/>
+  <label>Current Image:</label><img ng-src="{{user.imageUrl}}" alt="Image not found."/>
   <p>Username: {{user.username}}</p>
+  <p>E-Mail: {{user.email}}</p><br/><br/>
   <form ng-submit="updateProfile()">
     <div class="form-group">
       <label>Image URL:</label>
       <input type="text" ng-model="user.imageUrl" class="form-control"/>
-    </div>
-    <div class="form-group">
-      <label>E-Mail:</label>
-      <input type="text" value="{{user.email}}" ng-model="user.email" class="form-control"/>
     </div>
     <div class="form-group">
       <label>Gender: </label>

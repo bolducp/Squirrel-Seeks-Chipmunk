@@ -8,12 +8,15 @@ app.controller("profileCtrl", function($scope, $http, $state){
           var user = profileData.data;
           console.log("user:", user);
           console.log("user.username:", user.username);
-          $scope.user = {};
+          $scope.user = {pretty: {}};
           $scope.user.email = user.email;
           $scope.user.username = user.username;
           $scope.user.gender = user.gender;
           $scope.user.seeking = user.seeking;
           $scope.user.dob = user.dob;
+          if(user.dob){
+            $scope.user.pretty.dob = moment(user.dob).format("LL");
+          }
           $scope.user.likes = user.likes;
           $scope.user.dislikes = user.dislikes;
           $scope.user.imageUrl = user.imageUrl;

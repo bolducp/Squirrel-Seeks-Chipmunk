@@ -1,10 +1,16 @@
+link(rel="stylesheet", href="/css/profile.css")
 .container
   h1 Your Profile!
-  img(ng-src="{{user.imageUrl}}", alt="No Image Set.")
+  br
+  img(ng-src="{{user.imageUrl}}", alt="Image not found.")
+  br
+  br
   p E-Mail: {{user.email}}
   p Username: {{user.username}}
   p Gender: {{user.gender}}
-  p Seeking: {{user.seeking}}
-  p Date of Birth: {{user.dob}}
+  p Seeking:
+  ul 
+    li(ng-repeat="gender in user.seeking track by $index") {{gender}}
+  p Date of Birth: {{user.pretty.dob}}
     
   button(ui-sref="editProfile").btn.btn-info Edit Profile

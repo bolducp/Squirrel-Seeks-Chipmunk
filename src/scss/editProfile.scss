@@ -1,11 +1,6 @@
-body {
-  background-color: Gainsboro;
-}
-
-.link {
-  &:hover{
-    cursor: pointer;
-  }
+img {
+  max-height: 20vh;
+  max-width: 20vw;
 }
 
 #navLogin, #navRegister {
