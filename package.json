@@ -7,9 +7,9 @@
     "node": "4.2.4"
   },
   "scripts": {
-    "setup": "rm -rf node_modules public/bower_components && npm i && bower i && gulp build",
-    "start": "node ./bin/www",
-    "postinstall": "bower i"
+    "setup": "rm -rf node_modules public/lib && npm i && bower i && gulp build",
+  "start": "node ./bin/www",
+  "postinstall": "bower i"
   },
   "keywords": [],
   "author": "",
