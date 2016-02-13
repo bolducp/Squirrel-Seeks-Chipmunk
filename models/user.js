@@ -18,7 +18,6 @@ var userSchema = new mongoose.Schema({
   available: {type: Boolean, default: true}
 });
 
-
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;

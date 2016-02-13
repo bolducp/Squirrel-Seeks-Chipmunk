@@ -14,6 +14,7 @@ var ref = new Firebase('https://meandates.firebaseio.com/');
 var authMiddleware = require("../config/auth");
 
 var User = require("../models/user");
+var Chat = require("../models/chat");
 
 router.post('/register', userMethods.register, function(req, res, next) {
   res.send("register!");
@@ -63,7 +64,7 @@ router.get("/search", authMiddleware, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if(err) return res.status(400).send(err);
 
-    User.find({ gender: { $in: user.seeking }, available: true }, function(err, matches){
+    User.find({ gender: { $in: user.seeking }, available: true, _id: { $ne: req.user._id} }, function(err, matches){
       if(err) return res.status(400).send(err);
 
       findMatch(user.seeking);
@@ -72,17 +73,29 @@ router.get("/search", authMiddleware, function(req, res, next) {
         if(!count) count = 0;
         var index = Math.floor(Math.random()*matches.length);
         var match = matches[index];
-        console.log("user.seeking", user.seeking);
-        console.log("user.gender", user.gender);
-        console.log("match.seeking", match.seeking);
         if(!(match.seeking.indexOf(user.gender) !== -1) && count < 200){
-          console.log("Attemping to find match:", count);
           findMatch(seeking, ++count);
         }
         else{
           if(count < 200){
-            console.log("MATCH :", match);
-            res.send(match);
+            //initiate or resume chat here
+            // var userId = user._id;
+            Chat.findOne({users: {$in: [user._id] }, users: {$in: [match._id]}}, function(err, chat) {
+              if(err) return res.status(400).send(err);
+              console.log("Found chat:", chat);
+              if(!chat) {
+                var chat = new Chat();
+                chat.users = [user._id, match._id];
+                chat.save(function(err, newChat) {
+                  if(err) return res.status(400).send(err);
+                  console.log("new chat:", newChat);
+                  res.send({chat: newChat, match: match});
+                });
+              }
+              else {
+                res.send({chat: chat, match: match});
+              }
+            });
           }
           else {
             res.send("could not find user");
@@ -92,14 +105,5 @@ router.get("/search", authMiddleware, function(req, res, next) {
     });
   });
 });
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
