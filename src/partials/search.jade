@@ -9,6 +9,19 @@ link(rel="stylesheet", href="/css/search.css")
       | They are seeking:
       ul
         li(ng-repeat="gender in match.seeking track by $index") {{gender}}
-    br
-    .imgContainer
+
+  br
+  br
+  .row
+    .col-xs-6
       img(ng-src="{{match.imageUrl}}", alt="Match has no image.")
+    .col-xs-6
+      h3 Chat:
+      .chat
+        ul
+          li(ng-repeat="message in chat.messages track by $index") {{message}}
+        form
+          .form-group
+            input(type="text").form-control
+          .form-group
+            button.btn.btn-success.btn-sm Send

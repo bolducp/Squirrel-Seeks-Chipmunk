@@ -11,7 +11,6 @@ var authMiddleware = function(req, res, next) {
     return res.status(401).send('');
   }
   req.user = payload;
-  console.log("req.user:", req.user);
   next();
 };
 

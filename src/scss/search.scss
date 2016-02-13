@@ -1,11 +1,6 @@
-.imgContainer {
-  text-align: center;
-  img {
-    max-height: 60vh;
-    max-width: 60vw;
-    width: auto;
-    height: auto;
-  }
+img {
+  max-height: 60vh;
+  max-width: 100%;
 }
 
 #navLogin, #navRegister {
@@ -14,4 +9,24 @@
 
 #navLogout {
   display: list-item;;
+}
+
+.chat {
+  border: 1px solid lightsteelblue;
+  min-height: 30vh;
+  max-height: 50vh;
+  form {
+    bottom: 4px;
+    left: 19px;
+    position: absolute;
+    margin-bottom: 0px;
+    width: calc(100% - 38px);
+    .form-group{
+      margin-bottom: 4px;
+      width: calc(100% - 38px);
+    },
+    button {
+      width: calc(100%);
+    }
+  }
 }

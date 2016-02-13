@@ -1,13 +1,26 @@
-.imgContainer {
-  text-align: center; }
-  .imgContainer img {
-    max-height: 60vh;
-    max-width: 60vw;
-    width: auto;
-    height: auto; }
+img {
+  max-height: 60vh;
+  max-width: 100%; }
 
 #navLogin, #navRegister {
   display: none; }
 
 #navLogout {
   display: list-item; }
+
+.chat {
+  border: 1px solid lightsteelblue;
+  min-height: 30vh;
+  max-height: 50vh; }
+  .chat form {
+    bottom: 4px;
+    left: 19px;
+    position: absolute;
+    margin-bottom: 0px;
+    width: calc(100% - 38px); }
+    .chat form .form-group {
+      margin-bottom: 4px;
+      width: calc(100% - 38px); }
+    .chat form,
+    .chat form button {
+      width: calc(100%); }

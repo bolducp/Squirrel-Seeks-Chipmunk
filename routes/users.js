@@ -29,7 +29,7 @@ router.post("/logout", function(req, res, next) {
 });
 
 router.post("/auth", authMiddleware, function(req, res, next) {
-  res.send("User:", req.user);
+  res.send(`User: ${req.user}`);
 });
 
 router.get("/dashboard", authMiddleware, function(req, res, next) {
@@ -54,7 +54,6 @@ router.post("/profile", authMiddleware, function(req, res, next) {
     }
     user.save(function(err, savedUser){
       if(err) return res.status(400).send(err);
-      console.log("saved user", savedUser);
     });
     res.send(user);
   });
@@ -82,13 +81,11 @@ router.get("/search", authMiddleware, function(req, res, next) {
             // var userId = user._id;
             Chat.findOne({users: {$in: [user._id] }, users: {$in: [match._id]}}, function(err, chat) {
               if(err) return res.status(400).send(err);
-              console.log("Found chat:", chat);
               if(!chat) {
                 var chat = new Chat();
                 chat.users = [user._id, match._id];
                 chat.save(function(err, newChat) {
                   if(err) return res.status(400).send(err);
-                  console.log("new chat:", newChat);
                   res.send({chat: newChat, match: match});
                 });
               }
@@ -98,7 +95,7 @@ router.get("/search", authMiddleware, function(req, res, next) {
             });
           }
           else {
-            res.send("could not find user");
+            res.send("Could not find a match.");
           }
         }
       }
