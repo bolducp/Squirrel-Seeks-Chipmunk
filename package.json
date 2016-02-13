@@ -8,8 +8,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "setup": "rm -rf node_modules public/lib && npm i && bower i && gulp build",
-    "postinstall": "bower i && gulp build"
+    "setup": "rm -rf node_modules public/lib && npm i && bower i && gulp build"
   },
   "keywords": [],
   "author": "",
