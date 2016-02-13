@@ -1,10 +1,15 @@
 
 <link rel="stylesheet" href="/css/search.css"/>
 <div class="container">
-  <h1>Search for a "friend"</h1>
-  <form>
-    <div class="form-group">
-      <label>     </label>
-    </div>
-  </form>
+  <h1>Search for a "friend"</h1><br/>
+  <div class="row">
+    <div class="col-xs-4">Username: {{match.username}}</div>
+    <div class="col-xs-4">Gender: {{match.gender}}</div>
+    <div class="col-xs-4">They are seeking:
+      <ul>
+        <li ng-repeat="gender in match.seeking track by $index">{{gender}}</li>
+      </ul>
+    </div><br/>
+    <div class="imgContainer"><img ng-src="{{match.imageUrl}}" alt="Match has no image."/></div>
+  </div>
 </div>

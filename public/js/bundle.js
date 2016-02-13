@@ -137,12 +137,13 @@ app.controller("registerCtrl", function($scope, $http, $state){
   }
 });
 
-app.controller("searchCtrl", function($http, $state){
+app.controller("searchCtrl", function($http, $state, $scope){
   $http.post("/users/auth")
     .then(function() {
       $http.get("/users/search")
         .then(function(matchData){
-          console.log("matchData", matchData);
+          console.log("matchData.data", matchData.data);
+          $scope.match = matchData.data;
         }, function(err){
           console.error(err);
         })

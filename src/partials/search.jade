@@ -1,6 +1,14 @@
 link(rel="stylesheet", href="/css/search.css")
 .container
   h1 Search for a "friend"
-  form
-    .form-group
-      label      
+  br
+  .row
+    .col-xs-4() Username: {{match.username}}
+    .col-xs-4() Gender: {{match.gender}}
+    .col-xs-4
+      | They are seeking:
+      ul
+        li(ng-repeat="gender in match.seeking track by $index") {{gender}}
+    br
+    .imgContainer
+      img(ng-src="{{match.imageUrl}}", alt="Match has no image.")

@@ -1,0 +1,17 @@
+.imgContainer {
+  text-align: center;
+  img {
+    max-height: 60vh;
+    max-width: 60vw;
+    width: auto;
+    height: auto;
+  }
+}
+
+#navLogin, #navRegister {
+  display: none;
+}
+
+#navLogout {
+  display: list-item;;
+}
