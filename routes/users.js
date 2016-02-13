@@ -86,11 +86,11 @@ router.get("/search", authMiddleware, function(req, res, next) {
                 chat.users = [user._id, match._id];
                 chat.save(function(err, newChat) {
                   if(err) return res.status(400).send(err);
-                  res.send({chat: newChat, match: match});
+                  res.send({chat: newChat, match: match, user: user.username});
                 });
               }
               else {
-                res.send({chat: chat, match: match});
+                res.send({chat: chat, match: match, user: user.username});
               }
             });
           }
@@ -99,6 +99,18 @@ router.get("/search", authMiddleware, function(req, res, next) {
           }
         }
       }
+    });
+  });
+});
+
+router.post("/chat/:chatId", authMiddleware, function(req, res, next) {
+  Chat.findById(req.params.chatId, function(err, chat) {
+    if(err) return res.status(400).send(err);
+    var message = `${req.body.sender}: ${req.body.message}`
+    chat.messages.push(message);
+    chat.save(function(err, updatedChat) {
+      if(err) return res.status(400).send(err);
+      res.send(message);
     });
   });
 });

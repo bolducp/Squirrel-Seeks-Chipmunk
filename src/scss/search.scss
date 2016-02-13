@@ -13,8 +13,12 @@ img {
 
 .chat {
   border: 1px solid lightsteelblue;
-  min-height: 30vh;
-  max-height: 50vh;
+  height: 40vh;
+  ul {
+    max-height: calc(40vh - 84px);
+    overflow-y: scroll;
+  }
+
   form {
     bottom: 4px;
     left: 19px;
@@ -24,7 +28,8 @@ img {
     .form-group{
       margin-bottom: 4px;
       width: calc(100% - 38px);
-    },
+    }
+
     button {
       width: calc(100%);
     }

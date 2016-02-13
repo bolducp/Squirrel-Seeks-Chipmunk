@@ -19,9 +19,9 @@
         <ul>
           <li ng-repeat="message in chat.messages track by $index">{{message}}</li>
         </ul>
-        <form>
+        <form ng-submit="sendMsg(chatMsg)">
           <div class="form-group">
-            <input type="text" class="form-control"/>
+            <input ng-model="chatMsg" type="text" class="form-control"/>
           </div>
           <div class="form-group">
             <button class="btn btn-success btn-sm">Send</button>

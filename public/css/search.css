@@ -10,8 +10,10 @@ img {
 
 .chat {
   border: 1px solid lightsteelblue;
-  min-height: 30vh;
-  max-height: 50vh; }
+  height: 40vh; }
+  .chat ul {
+    max-height: calc(40vh - 84px);
+    overflow-y: scroll; }
   .chat form {
     bottom: 4px;
     left: 19px;
@@ -21,6 +23,5 @@ img {
     .chat form .form-group {
       margin-bottom: 4px;
       width: calc(100% - 38px); }
-    .chat form,
     .chat form button {
       width: calc(100%); }
