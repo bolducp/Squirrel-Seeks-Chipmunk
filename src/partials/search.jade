@@ -1,6 +1,7 @@
 link(rel="stylesheet", href="/css/search.css")
 .container
-  h1 Search for a "friend"
+  a(ng-click="newMatch()")
+    h1 Search for a new "friend"
   br
   .row
     .col-xs-4() Username: {{match.username}}
@@ -18,7 +19,7 @@ link(rel="stylesheet", href="/css/search.css")
     .col-xs-6
       h3 Chat:
       .chat
-        ul
+        ul#chatWindow
           li(ng-repeat="message in chat.messages track by $index") {{message}}
         form(ng-submit="sendMsg(chatMsg)")
           .form-group

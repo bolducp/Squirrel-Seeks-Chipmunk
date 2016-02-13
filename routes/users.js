@@ -79,7 +79,7 @@ router.get("/search", authMiddleware, function(req, res, next) {
           if(count < 200){
             //initiate or resume chat here
             // var userId = user._id;
-            Chat.findOne({users: {$in: [user._id] }, users: {$in: [match._id]}}, function(err, chat) {
+            Chat.findOne({$and: [{ users: {$in: [user._id] } }, { users: {$in: [match._id]} } ] }, function(err, chat) {
               if(err) return res.status(400).send(err);
               if(!chat) {
                 var chat = new Chat();
@@ -112,6 +112,13 @@ router.post("/chat/:chatId", authMiddleware, function(req, res, next) {
       if(err) return res.status(400).send(err);
       res.send(message);
     });
+  });
+});
+
+router.get("/chat/:chatId", authMiddleware, function(req, res, next) {
+  Chat.findById(req.params.chatId, function(err, chat) {
+    if(err) return res.status(400).send(err);
+    res.send(chat.messages);
   });
 });
 

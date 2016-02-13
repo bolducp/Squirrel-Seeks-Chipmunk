@@ -8,6 +8,9 @@ img {
 #navLogout {
   display: list-item; }
 
+a:hover {
+  cursor: pointer; }
+
 .chat {
   border: 1px solid lightsteelblue;
   height: 40vh; }
