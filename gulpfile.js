@@ -59,4 +59,6 @@ gulp.task('watch', function() {
   gulp.watch(config.paths.jade, ['jade']);
 });
 
-gulp.task('default', ['js', 'css', 'jade', 'watch']);
+gulp.task('build', ['js', 'css', 'jade']);
+
+gulp.task('default', ['build', 'watch']);

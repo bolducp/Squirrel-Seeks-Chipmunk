@@ -14,7 +14,7 @@ app.controller("searchCtrl", function($http, $state, $scope, $timeout){
           $scope.sendMsg = function(chatMsg) {
             $http.post(`/users/chat/${$scope.chat._id}`, {sender: res.data.user, message: chatMsg})
             .then(function(message){
-              var chatWindow = $("#chatWindow")
+              var chatWindow = $("#chatWindow");
               chatWindow.scrollTop(chatWindow[0].scrollHeight);
               $scope.chat.messages.push(message.data);
             },
