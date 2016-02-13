@@ -63,7 +63,7 @@ router.get("/search", authMiddleware, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if(err) return res.status(400).send(err);
 
-    User.find({ gender: { $in: user.seeking }, available: true, _id: { $ne: req.user._id} }, function(err, matches){
+    User.find({ $and: [ {gender: { $in: user.seeking } }, {available: true} , {_id: { $ne: req.user._id} } ]}, function(err, matches){
       if(err) return res.status(400).send(err);
 
       findMatch(user.seeking);
