@@ -25,6 +25,7 @@ a:hover {
     width: calc(100% - 38px); }
     .chat form .form-group {
       margin-bottom: 4px;
+      margin-right: 0px;
       width: calc(100% - 38px); }
     .chat form button {
       width: calc(100%); }
