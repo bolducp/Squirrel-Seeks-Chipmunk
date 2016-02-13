@@ -21,9 +21,11 @@ app.controller("searchCtrl", function($http, $state, $scope, $timeout){
               $http.get(`/users/chat/${$scope.chat._id}`)
                 .then(function(res){
                   $scope.chat.messages = res.data;
-                  var chatWindow = $("#chatWindow")
-                  chatWindow.scrollTop(chatWindow[0].scrollHeight);
-                  $timeout(getMessages, 2000);
+                  var chatWindow = $("#chatWindow");
+                  if(chatWindow){
+                    chatWindow.scrollTop(chatWindow[0].scrollHeight);
+                    $timeout(getMessages, 2000);
+                  }
                 }, function(err) {
                   return  console.error(err);
                 });
