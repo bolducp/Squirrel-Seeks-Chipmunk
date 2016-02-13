@@ -62,44 +62,52 @@ router.post("/profile", authMiddleware, function(req, res, next) {
 router.get("/search", authMiddleware, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if(err) return res.status(400).send(err);
-
-    User.find({ $and: [ {gender: { $in: user.seeking } }, {available: true} , {_id: { $ne: req.user._id} } ]}, function(err, matches){
-      if(err) return res.status(400).send(err);
-
-      findMatch(user.seeking);
-
-      function findMatch(seeking, count){
-        if(!count) count = 0;
-        var index = Math.floor(Math.random()*matches.length);
-        var match = matches[index];
-        if(!(match.seeking.indexOf(user.gender) !== -1) && count < 200){
-          findMatch(seeking, ++count);
-        }
-        else{
-          if(count < 200){
-            //initiate or resume chat here
-            // var userId = user._id;
-            Chat.findOne({$and: [{ users: {$in: [user._id] } }, { users: {$in: [match._id]} } ] }, function(err, chat) {
-              if(err) return res.status(400).send(err);
-              if(!chat) {
-                var chat = new Chat();
-                chat.users = [user._id, match._id];
-                chat.save(function(err, newChat) {
+    if(user.seeking[0] && user.gender){
+      User.find({ $and: [ {gender: { $in: user.seeking } }, {available: true} , {_id: { $ne: req.user._id} } ]}, function(err, matches){
+        if(err) return res.status(400).send(err);
+        console.log("matches:", matches);
+        var findMatch = function (seeking, count){
+          if(matches[0]){
+            if(!count) count = 0;
+            var index = Math.floor(Math.random()*matches.length);
+            var match = matches[index];
+            if(!(match.seeking.indexOf(user.gender) !== -1) && count < 200){
+              findMatch(seeking, ++count);
+            }
+            else{
+              if(count < 200){
+                //initiate or resume chat here
+                // var userId = user._id;
+                Chat.findOne({$and: [{ users: {$in: [user._id] } }, { users: {$in: [match._id]} } ] }, function(err, chat) {
                   if(err) return res.status(400).send(err);
-                  res.send({chat: newChat, match: match, user: user.username});
+                  if(!chat) {
+                    var chat = new Chat();
+                    chat.users = [user._id, match._id];
+                    chat.save(function(err, newChat) {
+                      if(err) return res.status(400).send(err);
+                      res.send({chat: newChat, match: match, user: user.username});
+                    });
+                  }
+                  else {
+                    res.send({chat: chat, match: match, user: user.username});
+                  }
                 });
               }
               else {
-                res.send({chat: chat, match: match, user: user.username});
+                res.send({swalErr: "No matches found."});
               }
-            });
+            }
           }
-          else {
-            res.send("Could not find a match.");
+          else{
+            res.send({swalErr: "No matches found."});
           }
         }
-      }
-    });
+        findMatch(user.seeking);
+      });
+    }
+    else {
+      res.send({swalErr: "Must select both gender & seeking"});
+    }
   });
 });
 
